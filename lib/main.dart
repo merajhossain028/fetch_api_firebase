@@ -5,10 +5,12 @@ import 'package:firebase_database/firebase_database.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,13 +18,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
@@ -30,6 +35,7 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _apiKeyController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  // ignore: deprecated_member_use
   final DatabaseReference _firebaseRef = FirebaseDatabase.instance.reference();
 
   String _firebaseData = '';
@@ -41,45 +47,45 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
- Future<void> _saveSettings() async {
-  if (_formKey.currentState!.validate()) {
-    // Retrieve the entered API key and password
-    final apiKey = _apiKeyController.text;
-    final password = _passwordController.text;
+  Future<void> _saveSettings() async {
+    if (_formKey.currentState!.validate()) {
+      // Retrieve the entered API key and password
+      final apiKey = _apiKeyController.text;
+      //final password = _passwordController.text;
 
-    // Update Firebase configuration with the new API key
-    final FirebaseOptions firebaseOptions = Firebase.app().options;
-    final updatedOptions = FirebaseOptions(
-      apiKey: apiKey,
-      appId: firebaseOptions.appId,
-      messagingSenderId: firebaseOptions.messagingSenderId,
-      projectId: firebaseOptions.projectId,
-      authDomain: firebaseOptions.authDomain,
-      databaseURL: firebaseOptions.databaseURL,
-      storageBucket: firebaseOptions.storageBucket,
-    );
-    await Firebase.initializeApp(options: updatedOptions);
+      // Update Firebase configuration with the new API key
+      final FirebaseOptions firebaseOptions = Firebase.app().options;
+      final updatedOptions = FirebaseOptions(
+        apiKey: apiKey,
+        appId: firebaseOptions.appId,
+        messagingSenderId: firebaseOptions.messagingSenderId,
+        projectId: firebaseOptions.projectId,
+        authDomain: firebaseOptions.authDomain,
+        databaseURL: firebaseOptions.databaseURL,
+        storageBucket: firebaseOptions.storageBucket,
+      );
+      await Firebase.initializeApp(options: updatedOptions);
 
-    // Authenticate or perform any additional verification with the password
+      // Authenticate or perform any additional verification with the password
 
-    // Fetch data from Firebase
-    final snapshot = await _firebaseRef.once();
-    final data = snapshot.snapshot.value;
+      // Fetch data from Firebase
+      final snapshot = await _firebaseRef.once();
+      final data = snapshot.snapshot.value;
 
-    setState(() {
-      _firebaseData = data.toString();
-    });
+      setState(() {
+        _firebaseData = data.toString();
+      });
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Firebase Data Sync'),
+        title: const Text('Firebase Data Sync'),
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Form(
@@ -88,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   TextFormField(
                     controller: _apiKeyController,
-                    decoration: InputDecoration(labelText: 'Web API Key'),
+                    decoration: const InputDecoration(labelText: 'Web API Key'),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter the API key';
@@ -98,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   TextFormField(
                     controller: _passwordController,
-                    decoration: InputDecoration(labelText: 'Password'),
+                    decoration: const InputDecoration(labelText: 'Password'),
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -109,20 +115,18 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ElevatedButton(
                     onPressed: _saveSettings,
-                    child: Text('Save Settings'),
+                    child: const Text('Save Settings'),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20.0),
-            Text('Firebase Data:'),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 20.0),
+            const Text('Firebase Data:'),
+            const SizedBox(height: 10.0),
             Text(_firebaseData),
           ],
         ),
       ),
     );
   }
-  
 }
-
