@@ -86,45 +86,48 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Container(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: _apiKeyController,
-                    decoration: const InputDecoration(labelText: 'Web API Key'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter the API key';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: const InputDecoration(labelText: 'Password'),
-                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter the password';
-                      }
-                      return null;
-                    },
-                  ),
-                  ElevatedButton(
-                    onPressed: _saveSettings,
-                    child: const Text('Save Settings'),
-                  ),
-                ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _apiKeyController,
+                      decoration:
+                          const InputDecoration(labelText: 'Web API Key'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the API key';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _passwordController,
+                      decoration: const InputDecoration(labelText: 'Password'),
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the password';
+                        }
+                        return null;
+                      },
+                    ),
+                    ElevatedButton(
+                      onPressed: _saveSettings,
+                      child: const Text('Save Settings'),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 20.0),
-            const Text('Firebase Data:'),
-            const SizedBox(height: 10.0),
-            Text(_firebaseData),
-          ],
+              const SizedBox(height: 20.0),
+              const Text('Firebase Data:'),
+              const SizedBox(height: 10.0),
+              Text(_firebaseData),
+            ],
+          ),
         ),
       ),
     );
