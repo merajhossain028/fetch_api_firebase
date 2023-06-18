@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "302085049254",
+    "project_id": "fetch-api-983be",
+    "storage_bucket": "fetch-api-983be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:302085049254:android:3820356c2fce4a1889dd67",
+        "android_client_info": {
+          "package_name": "com.newtech.fetchapi.fetch_api_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "302085049254-nl5v6u4fkhgrks90k1l5svatj08pcl9t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0twjtVgwVO8I_MvSgHgkDoBTPmEeSaV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "302085049254-nl5v6u4fkhgrks90k1l5svatj08pcl9t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
